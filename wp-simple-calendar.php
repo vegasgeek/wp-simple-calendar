@@ -38,28 +38,28 @@ Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA 02111-1307 USA
  */
 add_action( 'init', 'wpsimplecalendar_init' );
 function wpsimplecalendar_init() {
-	wp_register_style( 'wpsimplecalendarcolorboxcss', plugins_url('includes/js/colorbox/colorbox.css', __FILE__) );
-	wp_register_style( 'wpsimplecalendarcss', plugins_url('includes/css/screen.css', __FILE__), array( 'wpsimplecalendarcolorboxcss') );
+	wp_register_style( 'wpsimplecalendarcolorboxcss', plugins_url( 'includes/js/colorbox/colorbox.css', __FILE__) );
+	wp_register_style( 'wpsimplecalendarcss', plugins_url( 'includes/css/screen.css', __FILE__ ), array( 'wpsimplecalendarcolorboxcss' ) );
 
-	require_once( 'includes/core.php');
+	require_once( 'includes/core.php' );
 }
 
 /**
  * @since  1.0
  * Enqueue front end style sheets
  */
-add_action('wp_enqueue_scripts', 'wpsimplecalendar_stylesheet');
+add_action( 'wp_enqueue_scripts', 'wpsimplecalendar_stylesheet' );
 function wpsimplecalendar_stylesheet() {
 	if( ! is_admin() ) :
 		wp_enqueue_script(
 			'wpsimplecalendarcolorbox',
-			plugins_url('/includes/js/colorbox/jquery.colorbox.js', __FILE__ ),
+			plugins_url( '/includes/js/colorbox/jquery.colorbox.js', __FILE__ ),
 			array( 'jquery' )
 		);
 
 		wp_enqueue_script(
 			'wpsimplecalendarpublic',
-			plugins_url('/includes/js/wp-simple-calendar.js?v=1.1.0', __FILE__ ),
+			plugins_url( '/includes/js/wp-simple-calendar.js?v=1.1.0', __FILE__ ),
 			array( 'jquery' )
 		);
 			wp_localize_script(
@@ -78,37 +78,37 @@ function wpsimplecalendar_stylesheet() {
  * @since  1.1.1
  * register a start date column and remove the existing publish date column from the admin screen
  */
-function wpsimplecalendar_add_column($defaults) {
+function wpsimplecalendar_add_column( $defaults ) {
 	unset( $defaults['date'] );
 	$new = array();
 	//shift the order so that it's not the last column
-	foreach($defaults as $key => $value) {
-		if ($key=='taxonomy-wpsccategory') {
+	foreach( $defaults as $key => $value ) {
+		if ( $key == 'taxonomy-wpsccategory' ) {
 			$new['wpsc_start_date'] = 'Event Start Date';
 		}
 		$new[$key] = $value;
 	}
 	return $new;
 }
-add_filter('manage_wpscevents_posts_columns', 'wpsimplecalendar_add_column', 10);
+add_filter( 'manage_wpscevents_posts_columns', 'wpsimplecalendar_add_column', 10 );
 
 /**
  * @since  1.1.1
  * register the content for the new column
  */
-function wpsimplecalendar_columns_content($column_name, $post_ID) {
-	if ($column_name == 'wpsc_start_date') {
+function wpsimplecalendar_columns_content( $column_name, $post_ID ) {
+	if ( $column_name == 'wpsc_start_date' ) {
 		echo get_post_meta( $post_ID, $column_name, true );
 	}
 }
-add_action('manage_wpscevents_posts_custom_column', 'wpsimplecalendar_columns_content', 10, 2);
+add_action( 'manage_wpscevents_posts_custom_column', 'wpsimplecalendar_columns_content', 10, 2 );
 
 /**
  * @since 1.0
  * Setup Custom Post Type for events
  */
 
-add_action('init', 'wpsimplecalendar_create_custom_post_type');
+add_action( 'init', 'wpsimplecalendar_create_custom_post_type' );
 function wpsimplecalendar_create_custom_post_type()
 {
 	$labels = array(
@@ -128,21 +128,21 @@ function wpsimplecalendar_create_custom_post_type()
 	);
 
 	$args = array(
-		'labels' => $labels,
-		'public' => true,
-		'publicly_queryable' => true,
-		'show_ui' => true,
-		'show_in_menu' => true,
-		'query_var' => true,
-		'rewrite' => false,
-		'capability_type' => 'post',
-		'has_archive' => true,
-		'hierarchical' => false,
-		'menu_position' => null,
-		'supports' => array('title','editor' )
+		'labels'				=> $labels,
+		'public'				=> true,
+		'publicly_queryable'	=> true,
+		'show_ui'				=> true,
+		'show_in_menu'			=> true,
+		'query_var'				=> true,
+		'rewrite'				=> false,
+		'capability_type'		=> 'post',
+		'has_archive'			=> true,
+		'hierarchical'			=> false,
+		'menu_position'			=> null,
+		'supports'				=> array( 'title','editor' )
 	);
 
-	register_post_type('wpscevents',$args);
+	register_post_type( 'wpscevents',$args );
 
 	// import custom metaboxes
 	require_once( 'includes/metaboxes.php' );
@@ -159,26 +159,26 @@ function wpsimplecalendar_taxonomies()
 {
 	// Setup taxonomy for category
 	$labels = array(
-		'name'					=> _x( 'Categories', 'taxonomy general name' ),
-		'singular_name'			=> _x( 'Category', 'taxonomy singular name' ),
-		'search_items'			=> __( 'Search Categories' ),
-		'all_items'				=> __( 'All Categories' ),
-		'parent_item'			=> __( 'Parent Category' ),
-		'parent_item_colon'		=> __( 'Parent Category:' ),
-		'edit_item'				=> __( 'Edit Category' ),
-		'update_item'			=> __( 'Update Category' ),
-		'add_new_item'			=> __( 'Add New Category' ),
-		'new_item_name'			=> __( 'New Category Name' ),
-		'menu_name'				=> __( 'Categories' )
+		'name'				=> _x( 'Categories', 'taxonomy general name' ),
+		'singular_name'		=> _x( 'Category', 'taxonomy singular name' ),
+		'search_items'		=> __( 'Search Categories' ),
+		'all_items'			=> __( 'All Categories' ),
+		'parent_item'		=> __( 'Parent Category' ),
+		'parent_item_colon'	=> __( 'Parent Category:' ),
+		'edit_item'			=> __( 'Edit Category' ),
+		'update_item'		=> __( 'Update Category' ),
+		'add_new_item'		=> __( 'Add New Category' ),
+		'new_item_name'		=> __( 'New Category Name' ),
+		'menu_name'			=> __( 'Categories' )
 	);
 
 	$args = array(
-		'hierarchical'				=> true,
-		'labels'					=> $labels,
-		'show_ui'					=> true,
-		'show_admin_column'			=> true,
-		'query_var'					=> true,
-		'rewrite'					=> false
+		'hierarchical'		=> true,
+		'labels'			=> $labels,
+		'show_ui'			=> true,
+		'show_admin_column'	=> true,
+		'query_var'			=> true,
+		'rewrite'			=> false
     );
 
 	register_taxonomy( 'wpsccategory', array( 'wpscevents' ), $args );
@@ -186,26 +186,26 @@ function wpsimplecalendar_taxonomies()
 
 	// Setup taxonomy for location
 	$labels = array(
-		'name'					=> _x( 'Locations', 'taxonomy general name' ),
-		'singular_name'			=> _x( 'Location', 'taxonomy singular name' ),
-		'search_items'			=> __( 'Search Locations' ),
-		'all_items'				=> __( 'All Locations' ),
-		'parent_item'			=> __( 'Parent Location' ),
-		'parent_item_colon'		=> __( 'Parent Location:' ),
-		'edit_item'				=> __( 'Edit Location' ),
-		'update_item'			=> __( 'Update Location' ),
-		'add_new_item'			=> __( 'Add New Location' ),
-		'new_item_name'			=> __( 'New Location Name' ),
-		'menu_name'				=> __( 'Locations' )
+		'name'				=> _x( 'Locations', 'taxonomy general name' ),
+		'singular_name'		=> _x( 'Location', 'taxonomy singular name' ),
+		'search_items'		=> __( 'Search Locations' ),
+		'all_items'			=> __( 'All Locations' ),
+		'parent_item'		=> __( 'Parent Location' ),
+		'parent_item_colon'	=> __( 'Parent Location:' ),
+		'edit_item'			=> __( 'Edit Location' ),
+		'update_item'		=> __( 'Update Location' ),
+		'add_new_item'		=> __( 'Add New Location' ),
+		'new_item_name'		=> __( 'New Location Name' ),
+		'menu_name'			=> __( 'Locations' )
 	);
 
 	$args = array(
-		'hierarchical'				=> true,
-		'labels'					=> $labels,
-		'show_ui'					=> true,
-		'show_admin_column'			=> true,
-		'query_var'					=> true,
-		'rewrite'					=> false
+		'hierarchical'		=> true,
+		'labels'			=> $labels,
+		'show_ui'			=> true,
+		'show_admin_column'	=> true,
+		'query_var'			=> true,
+		'rewrite'			=> false
     );
 
 	register_taxonomy( 'wpsclocation', array( 'wpscevents' ), $args );
@@ -240,7 +240,7 @@ function wpsimplecalendar_list_shortcode( $atts ) {
  * Function to display the events in list format
  *
  * To include a list of upcoming events in your template:
- * <?php if(function_exists('wpsimplecalendar_list')) { wpsimplecalendar_list(); } ?>
+ * <?php if(function_exists( 'wpsimplecalendar_list' )) { wpsimplecalendar_list(); } ?>
  */
 
 function wpsimplecalendar_events_list( $category='', $quantity='' ) {
@@ -277,7 +277,7 @@ function wpsimplecalendar_grid_shortcode( $atts ) {
  * Funciton to display the events in a grid format
  *
  * To include the calendar using a grid format in your template:
- * <?php if(function_exists('wpsimplecalendar_grid')) { wpsimplecalendar_grid(); } ?>
+ * <?php if(function_exists( 'wpsimplecalendar_grid' )) { wpsimplecalendar_grid(); } ?>
  */
 
 function wpsimplecalendar_grid( $category='', $location='' ) {
@@ -311,7 +311,6 @@ function wpsimplecalendar_handle_next_ajax() {
 	die( json_encode( array( 'title' => date( 'F Y', strtotime( $next_month.'/1/'.$year ) ), 'grid' => wpsimplecalendar_setup_grid( $next_month, $year, $category, $location ) ) ) );
 	die(0);
 }
-
 
 add_action( 'wp_ajax_wpsimplecalendar-last', 'wpsimplecalendar_handle_last_ajax' );
 add_action( 'wp_ajax_nopriv_wpsimplecalendar-last', 'wpsimplecalendar_handle_last_ajax' );
@@ -441,7 +440,7 @@ function wpsimplecalendar_setup_grid( $month, $year, $eventcategory = '', $event
 		while ( $eventsloop->have_posts() ) : $eventsloop->the_post();
 
 			$startdate  = date( 'Y-m-d', strtotime( get_post_meta( $post->ID, "wpsc_start_date", $single = true ) ) ) ;
-			$list_month = date('m',mktime(0,0,0,$month,1,$year));
+			$list_month = date( 'm',mktime(0,0,0,$month,1,$year));
 			$listdate = $year . '-' . $list_month . '-' . $list_day;
 
 			if ( $listdate == $startdate ) {
@@ -479,7 +478,7 @@ function wpsimplecalendar_setup_grid( $month, $year, $eventcategory = '', $event
 	$calendar.= '</tr>';	// End the table, finally!
 	$calendar.= '</table>';	// All done, return result
 	$jscode = "<script>
-   		jQuery('a.cboxElement').colorbox({height:'400', width:'400', rel:'nofollow'});
+   		jQuery( 'a.cboxElement' ).colorbox({height:'400', width:'400', rel:'nofollow'});
 		</script>";
 
 	return $calendar . $jscode;
