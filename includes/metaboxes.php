@@ -46,35 +46,30 @@ function wpsimplecalendar_register_calendar_box() {
 	) );
 
 	$cmb->add_field( array(
-		'name' => __( 'Start Date', 'cmb2' ),
-		'desc' => __( '', 'cmb2' ),
-		'id'   => $prefix . 'start_date',
-		'type' => 'text_date',
-		// 'date_format' => 'Y-m-d',
+		'name'             => __( 'All Day Event?', 'cmb2' ),
+		'desc'             => __( '', 'cmb2' ),
+		'id'               => $prefix . 'all_day_event',
+		'type'             => 'radio_inline',
+		'options'          => array(
+			'1' => __( 'Yes', 'cmb2' ),
+			'0'   => __( 'No', 'cmb2' ),
+		),
+		'default'          => '1',
 	) );
 
 	$cmb->add_field( array(
-		'name' => __( 'End Date', 'cmb2' ),
+		'name' => __( 'Event Start', 'cmb2' ),
+		'desc' => __( '', 'cmb2' ),
+		'id'   => $prefix . 'start_date_time',
+		'type' => 'text_datetime_timestamp',
+
+	) );
+
+	$cmb->add_field( array(
+		'name' => __( 'Event End', 'cmb2' ),
 		'desc' => __( 'Leave blank for single day events', 'cmb2' ),
-		'id'   => $prefix . 'end_date',
-		'type' => 'text_date',
-		// 'date_format' => 'Y-m-d',
-	) );
-
-	$cmb->add_field( array(
-		'name' => __( 'Start Time', 'cmb2' ),
-		'desc' => __( '', 'cmb2' ),
-		'id'   => $prefix . 'start_time',
-		'type' => 'text_time',
-		// 'time_format' => 'H:i', // Set to 24hr format
-	) );
-
-	$cmb->add_field( array(
-		'name' => __( 'End Time', 'cmb2' ),
-		'desc' => __( '', 'cmb2' ),
-		'id'   => $prefix . 'end_time',
-		'type' => 'text_time',
-		// 'time_format' => 'H:i', // Set to 24hr format
+		'id'   => $prefix . 'end_date_time',
+		'type' => 'text_datetime_timestamp',
 	) );
 
 	$cmb->add_field( array(
@@ -92,6 +87,5 @@ function wpsimplecalendar_register_calendar_box() {
 		'type'       => 'text',
 		//'show_on_cb' => 'yourprefix_hide_if_no_cats', // function should return a bool value
 	) );
-
 
 }
