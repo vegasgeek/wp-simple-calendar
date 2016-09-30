@@ -1,6 +1,5 @@
 === WP Simple Calendar ===
-Contributors: 9seeds, vegasgeek, themightymo, brandondove
-Donate Link: http://9seeds.com/donate/
+Contributors: vegasgeek, themightymo, brandondove
 Tags: calendar
 Requires at least: 3.0
 Tested up to: 3.7.1

@@ -1,20 +1,20 @@
 <?php
 /*
 Plugin Name: WP Simple Calendar
-Plugin URI: http://9seeds.com/plugins/
+Plugin URI: http://vegasgeek.com/
 Description: A simple plugin to make it simple to add a calendar or list of events to your site. Simply.
 Version: 1.1.1
 Requires at least: WordPress 3.0
 Tested up to: WordPress 3.7.1
 License: GPLv2 or later
 Author: John Hawkins, Toby Cryns, Adrienne Peirce
-Author URI: http://9seeds.com/
+Author URI: http://vegasgeek.com/
 Modified: Nikki Blight <nblight@nlb-creations.com>
 
 ------------------------------------------------------------------------
 
-Copyright 2013
-John Hawkins (email : john@9seeds.com)
+Copyright 2013-2016
+John Hawkins (email : john@vegasgeek.com)
 Toby Cryns  (email : toby@themightymo.com)
 
 This program is free software; you can redistribute it and/or modify
@@ -40,7 +40,6 @@ add_action( 'init', 'wpsimplecalendar_init' );
 function wpsimplecalendar_init() {
 	wp_register_style( 'wpsimplecalendarcolorboxcss', plugins_url('includes/js/colorbox/colorbox.css', __FILE__) );
 	wp_register_style( 'wpsimplecalendarcss', plugins_url('includes/css/screen.css', __FILE__), array( 'wpsimplecalendarcolorboxcss') );
-
 
 	require_once( 'includes/core.php');
 }
