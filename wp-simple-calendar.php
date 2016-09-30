@@ -145,7 +145,7 @@ function wpsimplecalendar_create_custom_post_type()
 	register_post_type('wpscevents',$args);
 
 	// import custom metaboxes
-	require_once( 'includes/metaboxes/metaboxes.php' );
+	require_once( 'includes/metaboxes.php' );
 
 }
 
