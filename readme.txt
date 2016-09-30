@@ -32,6 +32,11 @@ For list view:
 
 == Changelog ==
 
+= 1.2 =
+* Replaced Custom Meta Boxes library with CMB2
+* Replaced dates stored as text with unix timestamps
+* Updated list view to show all future events if no quantity is set
+
 = 1.1.1 =
 * Created a more efficient and accurate method of querying for events in the wpsclist shortcode
 * Added an Event Start Date column to the admin screen
