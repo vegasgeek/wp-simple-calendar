@@ -1,0 +1,143 @@
+.wpsimplecalendar-basic-widget-title {  }
+.wpsimplecalendar-ul li {
+	padding-bottom: 1em;
+	border-bottom: 1px dotted #CCC;
+	margin-bottom: 1em;
+}
+
+/* =Grid Layout
+-------------------------------------------------------------- */
+
+.wpsc-grid {
+	border-left: 1px solid #999;
+}
+
+.wpsc-grid-row { 
+
+}
+
+.wpsc-grid-day {
+	height: 100px;
+	font-size: 11px;
+	position: relative;
+	vertical-align: top;
+}
+
+.wpsc-grid-day {
+	height: 80px;
+}
+
+.current-day {
+	background: #eee;
+}
+
+.wpsc-grid-day-np {
+	background: #ccc;
+	min-height: 80px;
+}
+
+.wpsc-grid-day-np {
+	height: 80px;
+}
+
+.wpsc-grid-day-head {
+	background: #ccc;
+	font-weight: bold;
+	text-align: center;
+	width: 120px;
+	padding: 5px;
+	border-bottom: 1px solid #999;
+	border-top: 1px solid #999;
+	border-right: 1px solid #999;
+}
+
+.wpsc-date {
+	background: #000;
+	padding: 5px;
+	color: #fff;
+	float: right;
+	font-weight: bold;
+	margin: 0;
+	width: 20px;
+	text-align: center;
+}
+
+.wpsc-grid-day,
+.wpsc-grid-day-np {
+	width: 120px;
+	padding: 5px;
+	border-bottom: 1px solid #999;
+	border-right: 1px solid #999;
+}
+
+#wpsc-grid-nav {
+	text-align: center;
+}
+
+ul.simple-cal-list {
+	margin-left: 10px;
+}
+
+.wpsc-grid-day .simple-cal-list li {
+	list-style: none;
+	margin-left: 10px;
+	text-align: left;
+	padding-left: 0;
+}
+
+/* =Mini Grid Layout
+-------------------------------------------------------------- */
+#wpsc-mini-grid .wpsc-grid-day {
+	padding: 0;
+}
+
+#wpsc-mini-grid .wpsc-date {
+    background: none;
+    color: #ccc;
+    float: none;
+	font-size: 32px;
+    font-weight: bold;
+	line-height: 80px;
+    height: inherit;
+    margin: 0;
+    padding: 0;
+    text-align: center;
+    width: 100%;
+}
+
+#wpsc-mini-grid a.thickbox {
+    background: none;
+    color: #000;
+	display: block;
+    height: inherit;
+    margin: 0;
+    padding: 0;
+    width: 100%;
+	text-decoration: none;
+}
+
+#wpsc-mini-grid a:hover.thickbox {
+    background: #000;
+    color: #fff;
+	text-decoration: none;
+}
+
+#wpsc-mini-grid .wpsc-posts {
+	display: none;
+}
+
+#TB_window #TB_ajaxContent {
+    padding: 10px 15px 15px;
+}
+
+/* =Colorbox overrides
+--------------------------------------------------------- */
+
+#cboxLoadedContent p {
+	margin-bottom: 10px;
+}
+
+#cboxLoadedContent h1 {
+	margin-bottom: 20px;
+	font-size: 20px;
+}
