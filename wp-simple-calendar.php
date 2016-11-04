@@ -5,7 +5,7 @@ Plugin URI: http://vegasgeek.com/
 Description: A simple plugin to make it simple to add a calendar or list of events to your site. Simply.
 Version: 2.0
 Requires at least: WordPress 3.0
-Tested up to: WordPress 3.7.1
+Tested up to: WordPress 4.6.1
 License: GPLv2 or later
 Author: John Hawkins, Toby Cryns, Adrienne Peirce
 Author URI: http://vegasgeek.com/
