@@ -91,7 +91,7 @@ function wpsimplecalendar_setup_grid( $month, $year, $eventcategory = '', $event
 			foreach($events as $e) {
 				$today = mktime( 0, 0, 0, $month, $i, $year );
 				$tomorrow = mktime( 0, 0, 0, $month, $i+1, $year );
-				if( $e['meta']['wpsc_start_date_time'][0] <= $tomorrow
+				if( $e['meta']['wpsc_start_date_time'][0] < $tomorrow
 				   && $e['meta']['wpsc_end_date_time'][0] >= $today ) {
 					$eventbyday[$i][] = $e;
 				}
