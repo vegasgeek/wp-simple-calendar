@@ -1,5 +1,5 @@
 === WP Simple Calendar ===
-Contributors: vegasgeek, themightymo, brandondove
+Contributors: vegasgeek, themightymo, brandondove, toddhuish
 Tags: calendar
 Requires at least: 3.0
 Tested up to: 3.7.1
@@ -36,6 +36,7 @@ For list view:
 * Replaced Custom Meta Boxes library with CMB2
 * Replaced dates stored as text with unix timestamps
 * Updated list view to show all future events if no quantity is set
+* Reworked grid view display code for efficiency
 
 = 1.1.1 =
 * Created a more efficient and accurate method of querying for events in the wpsclist shortcode
