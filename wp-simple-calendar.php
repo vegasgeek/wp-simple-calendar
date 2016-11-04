@@ -33,7 +33,13 @@ Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA 02111-1307 USA
 */
 
 define( 'WPSC_VERSION', '2.0' );
-require_once( 'upgrade.php' );
+
+/**
+ * @since  2.0
+ * Database upgrade routine
+ */
+require( 'wpsc-upgrade.php' );
+register_activation_hook( __FILE__, 'wpsc_upgrade_routine' );
 
 /**
  * @since  1.0
@@ -453,7 +459,7 @@ function wpsimplecalendar_setup_grid( $month, $year, $eventcategory = '', $event
 
 	// Keep going with days...
 	for( $list_day = 1; $list_day <= $days_in_month; $list_day++ ) {
-		if( ( $list_day == $currentday) && ($month == date( 'm' ) ) ) {
+		if( ( $list_day == $current) && ($month == date( 'm' ) ) ) {
 			$calendar.= '<td class="wpsc-grid-day current-day">';
 		} else {
 			$calendar.= '<td class="wpsc-grid-day">';

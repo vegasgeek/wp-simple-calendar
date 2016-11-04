@@ -5,11 +5,11 @@
  * Upgrade routine to convert data to new style
  * 
  */
-register_activation_hook( __FILE__, 'wpsc_upgrade_routine' );
-// A secondary way of hitting the routine in case of upgrade
-add_action( 'upgrader_process_complete', 'wpsc_upgrade_routine', 10, 2 );
+// add_action( 'upgrader_process_complete', 'wpsc_upgrade_routine', 10, 2 );
+// If upgrade doesn't catch it, de/re-activate will do the trick
 
 function wpsc_upgrade_routine() {
+
 	$options = get_option( 'wpsc_options' );
 
 	if( !isset( $options['wpsc_version'] ) ) {
