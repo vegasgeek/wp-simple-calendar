@@ -5,7 +5,8 @@
  * Upgrade routine to convert data to new style
  * 
  */
-// Run upgrade script at time of upgrade
+register_activation_hook( __FILE__, 'wpsc_upgrade_routine' );
+// A secondary way of hitting the routine in case of upgrade
 add_action( 'upgrader_process_complete', 'wpsc_upgrade_routine', 10, 2 );
 
 function wpsc_upgrade_routine() {
@@ -44,10 +45,10 @@ function wpsc_upgrade_routine() {
 
 				// Setup end date
 				if( get_post_meta( get_the_id(), 'wpsc_end_date', true ) ) {
-					$old_start_date = get_post_meta( get_the_id(), 'wpsc_end_date', true );
+					$old_end_date = get_post_meta( get_the_id(), 'wpsc_end_date', true );
 				
 					if( get_post_meta( get_the_id(), 'wpsc_end_time', true ) ) {
-						$old_start_time = get_post_meta( get_the_id(), 'wpsc_end_time', true );
+						$old_end_time = get_post_meta( get_the_id(), 'wpsc_end_time', true );
 					}
 
 					if( isset( $old_end_time ) ) {
