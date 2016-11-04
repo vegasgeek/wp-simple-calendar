@@ -3,7 +3,7 @@
 Plugin Name: WP Simple Calendar
 Plugin URI: http://vegasgeek.com/
 Description: A simple plugin to make it simple to add a calendar or list of events to your site. Simply.
-Version: 1.2
+Version: 2.0
 Requires at least: WordPress 3.0
 Tested up to: WordPress 3.7.1
 License: GPLv2 or later
