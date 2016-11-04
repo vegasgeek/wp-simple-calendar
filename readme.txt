@@ -3,7 +3,7 @@ Contributors: vegasgeek, themightymo, brandondove, toddhuish
 Tags: calendar
 Requires at least: 3.0
 Tested up to: 3.7.1
-Stable tag: 1.1.1
+Stable tag: 2.0
 License: GPLv2 or later
 
 A simple grid view calendar
