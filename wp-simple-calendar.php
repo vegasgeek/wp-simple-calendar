@@ -332,7 +332,8 @@ function wpsimplecalendar_handle_last_ajax() {
  * Function to setup the calendar grid
  */
 
-function wpsimplecalendar_setup_grid( $month, $year, $eventcategory = '', $eventlocation = '' ) {
+require( 'temp-func.php' );
+function hold_wpsimplecalendar_setup_grid( $month, $year, $eventcategory = '', $eventlocation = '' ) {
 	$time = current_time( 'timestamp', $gmt = 0 );
 	
 	$running_day       = date( 'w', mktime( 0, 0, 0, $month, 1, $year ) );
