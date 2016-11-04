@@ -49,6 +49,7 @@ function wpsimplecalendar_register_calendar_box() {
 		'desc' => __( '', 'cmb2' ),
 		'id'   => $prefix . 'start_date_time',
 		'type' => 'text_datetime_timestamp',
+		'default'		=> date( 'u' ),
 		'attributes'	=> array(
 			'required'	=> 'required',
 		),
@@ -59,6 +60,7 @@ function wpsimplecalendar_register_calendar_box() {
 		'desc' => __( '', 'cmb2' ),
 		'id'   => $prefix . 'end_date_time',
 		'type' => 'text_datetime_timestamp',
+		'default'		=> date( 'u' ),
 		'attributes'	=> array(
 			'required'	=> 'required',
 		),
