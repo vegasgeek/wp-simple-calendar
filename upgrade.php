@@ -24,6 +24,12 @@ function wpsc_upgrade_routine() {
 		$the_query = new WP_Query( $args );
 		if ( $the_query->have_posts() ) {
 			while ( $the_query->have_posts() ) {
+				// reset values
+				$old_start_date = '';
+				$old_start_time = '';
+				$old_end_date = '';
+				$old_end_time = '';
+
 				$the_query->the_post();
 				// Setup start date
 				if( get_post_meta( get_the_id(), 'wpsc_start_date', true ) ) {
@@ -57,9 +63,9 @@ function wpsc_upgrade_routine() {
 						$old_end_date_time = $old_end_date;
 					}
 
-					$old_end_date_string = date( "U", strtotime( $old_end_date_time ) );
+					$new_end_date_string = date( "U", strtotime( $old_end_date_time ) );
 
-					update_post_meta( get_the_id(), 'wpsc_end_date_time', $old_end_date_string );
+					update_post_meta( get_the_id(), 'wpsc_end_date_time', $new_end_date_string );
 				} else {
 					update_post_meta( get_the_id(), 'wpsc_end_date_time', $new_start_date_string );
 				}
