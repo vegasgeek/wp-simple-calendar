@@ -36,6 +36,7 @@ For list view:
 * Replaced Custom Meta Boxes library with CMB2
 * Replaced dates stored as text with unix timestamps
 * Updated list view to show all future events if no quantity is set
+* Reworked grid view display code for efficiency
 
 = 1.1.1 =
 * Created a more efficient and accurate method of querying for events in the wpsclist shortcode
