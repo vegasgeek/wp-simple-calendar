@@ -7,21 +7,18 @@ while ( have_posts() ) {
 		// See if event is single day or multiple day
 		if( !strlen( get_post_meta( get_the_ID(), 'wpsc_end_date', true ) ) ) {
 			// single day event
-			$date = date_i18n( get_option('date_format'), strtotime( get_post_meta( get_the_ID(), 'wpsc_start_date', true ) ) );
-
-			// echo date_i18n(get_option('date_format') ,strtotime("11/15-1976"));?
-
+			$date = date_i18n( get_option('date_format'), strtotime( get_post_meta( get_the_ID(), 'wpsc_start_date_time', true ) ) );
 		} else {
 			// multi day event
-			$date = date_i18n( get_option('date_format'), strtotime( get_post_meta( get_the_ID(), 'wpsc_start_date', true ) ) );
+			$date = date_i18n( get_option('date_format'), strtotime( get_post_meta( get_the_ID(), 'wpsc_start_date_time', true ) ) );
 			$date .= ' - ';
-			$date .= date_i18n( get_option('date_format'), strtotime( get_post_meta( get_the_ID(), 'wpsc_end_date', true ) ) );
+			$date .= date_i18n( get_option('date_format'), strtotime( get_post_meta( get_the_ID(), 'wpsc_end_date_time', true ) ) );
 		}
 
 	// time
 		// see if there's a time
-		if( strlen( get_post_meta( get_the_ID(), 'wpsc_start_time', true ) ) ) {
-			$time = '<br />' . date( 'g:i A', strtotime( get_post_meta( get_the_ID(), 'wpsc_start_time', true ) ) );
+		if( strlen( get_post_meta( get_the_ID(), 'wpsc_start_date_time', true ) ) ) {
+			$time = '<br />' . date( 'g:i A', strtotime( get_post_meta( get_the_ID(), 'wpsc_start_date_time', true ) ) );
 		}
 
 		// see if there's a time
