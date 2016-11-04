@@ -86,7 +86,7 @@ function wpsimplecalendar_add_column( $defaults ) {
 	//shift the order so that it's not the last column
 	foreach( $defaults as $key => $value ) {
 		if ( $key == 'taxonomy-wpsccategory' ) {
-			$new['wpsc_start_date'] = 'Event Start Date';
+			$new['wpsc_start_date_time'] = 'Event Start Date';
 		}
 		$new[$key] = $value;
 	}
@@ -99,8 +99,9 @@ add_filter( 'manage_wpscevents_posts_columns', 'wpsimplecalendar_add_column', 10
  * register the content for the new column
  */
 function wpsimplecalendar_columns_content( $column_name, $post_ID ) {
-	if ( $column_name == 'wpsc_start_date' ) {
-		echo get_post_meta( $post_ID, $column_name, true );
+	if ( $column_name == 'wpsc_start_date_time' ) {
+		echo date_i18n( get_option( 'date_format' ), strtotime( get_post_meta( $post_ID, $column_name, true ) ) );
+
 	}
 }
 add_action( 'manage_wpscevents_posts_custom_column', 'wpsimplecalendar_columns_content', 10, 2 );
@@ -332,7 +333,8 @@ function wpsimplecalendar_handle_last_ajax() {
  * Function to setup the calendar grid
  */
 
-function wpsimplecalendar_setup_grid( $month, $year, $eventcategory = '', $eventlocation = '' ) {
+require( 'temp-func.php' );
+function hold_wpsimplecalendar_setup_grid( $month, $year, $eventcategory = '', $eventlocation = '' ) {
 	$time = current_time( 'timestamp', $gmt = 0 );
 	
 	$running_day       = date( 'w', mktime( 0, 0, 0, $month, 1, $year ) );
