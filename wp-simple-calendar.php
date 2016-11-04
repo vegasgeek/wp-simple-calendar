@@ -100,7 +100,8 @@ add_filter( 'manage_wpscevents_posts_columns', 'wpsimplecalendar_add_column', 10
  */
 function wpsimplecalendar_columns_content( $column_name, $post_ID ) {
 	if ( $column_name == 'wpsc_start_date_time' ) {
-		echo date_i18n( get_option( 'date_format' ), strtotime( get_post_meta( $post_ID, $column_name, true ) ) );
+			wp_die( get_post_meta( $post_ID, $column_name, true ) );
+		echo date_i18n( get_option( 'date_format' ), get_post_meta( $post_ID, $column_name, true ) );
 
 	}
 }
@@ -509,8 +510,7 @@ function wpsimplecalendar_setup_grid( $month, $year, $eventcategory = '', $event
  * Upgrade routine to convert data to new style
  * 
  */
-register_activation_hook( __FILE__, 'wpsc_upgrade_routine' );
-// A secondary way of hitting the routine in case of upgrade
+// Run upgrade script at time of upgrade
 add_action( 'upgrader_process_complete', 'wpsc_upgrade_routine', 10, 2 );
 
 function wpsc_upgrade_routine() {
