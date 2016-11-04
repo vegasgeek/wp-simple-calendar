@@ -62,14 +62,19 @@ function wpsimplecalendar_register_calendar_box() {
 		'desc' => __( '', 'cmb2' ),
 		'id'   => $prefix . 'start_date_time',
 		'type' => 'text_datetime_timestamp',
-
+		'attributes'	=> array(
+			'required'	=> 'required',
+		),
 	) );
 
 	$cmb->add_field( array(
 		'name' => __( 'Event End', 'cmb2' ),
-		'desc' => __( 'Leave blank for single day events', 'cmb2' ),
+		'desc' => __( '', 'cmb2' ),
 		'id'   => $prefix . 'end_date_time',
 		'type' => 'text_datetime_timestamp',
+		'attributes'	=> array(
+			'required'	=> 'required',
+		),
 	) );
 
 	$cmb->add_field( array(
