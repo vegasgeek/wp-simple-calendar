@@ -542,9 +542,9 @@ function wpsc_upgrade_routine() {
 					$old_start_date_time = $old_start_date;
 				}
 
-				$old_start_date_string = date( "U", strtotime( $old_start_date_time ) );
+				$new_start_date_string = date( "U", strtotime( $old_start_date_time ) );
 
-				update_post_meta( get_the_id(), 'wpsc_start_date_time', $old_start_date_string );
+				update_post_meta( get_the_id(), 'wpsc_start_date_time', $new_start_date_string );
 
 				// Setup end date
 				if( get_post_meta( get_the_id(), 'wpsc_end_date', true ) ) {
@@ -563,6 +563,8 @@ function wpsc_upgrade_routine() {
 					$old_end_date_string = date( "U", strtotime( $old_end_date_time ) );
 
 					update_post_meta( get_the_id(), 'wpsc_end_date_time', $old_end_date_string );
+				} else {
+					update_post_meta( get_the_id(), 'wpsc_end_date_time', $new_start_date_string );
 				}
 
 				// See if there was a start time set
