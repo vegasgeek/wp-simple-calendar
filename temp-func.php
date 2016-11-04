@@ -27,10 +27,16 @@ function wpsimplecalendar_setup_grid( $month, $year, $eventcategory = '', $event
 			'meta_key'			=> 'wpsc_start_date_time',
 			'order'				=> 'ASC',
 			'meta_query' => array(
+				'relation' => 'AND',
 				array(
 					'key'		=> 'wpsc_start_date_time',
-					'value'		=> array( $start_of_month, $end_of_month ),
-					'compare'	=> 'BETWEEN',
+					'value'		=> $end_of_month,
+					'compare'	=> '<=',
+       			),
+				array(
+					'key'		=> 'wpsc_end_date_time',
+					'value'		=> $start_of_month,
+					'compare'	=> '>=',
        			)
    			)
 		);
@@ -68,18 +74,29 @@ function wpsimplecalendar_setup_grid( $month, $year, $eventcategory = '', $event
 				)
 			);
 		}
-
+		
 		$eventsloop = new WP_Query( $cal_args );
 		// event posts loop
+		// gets all possible events for this time period and puts it into a structure for easy access later
+		$events = $eventbyday = array();
 		while ( $eventsloop->have_posts() ) : $eventsloop->the_post();
-
-			echo $post->post_title . '<br />';
+			$meta = get_post_meta(get_the_ID());
+			$classes = get_post_class();
+			$event =array('event'=>$eventsloop->post,'meta'=>$meta,'classes'=>$classes);
+			$events[] = $event;
 		endwhile;
 
-
-
-
-
+		//now that we're done with the database lets organize this into something the calendar can use for reference
+		for($i = 1; $i <= $days_in_month; $i++) {
+			foreach($events as $e) {
+				$today = mktime( 0, 0, 0, $month, $i, $year );
+				$tomorrow = mktime( 0, 0, 0, $month, $i+1, $year );
+				if( $e['meta']['wpsc_start_date_time'][0] <= $tomorrow
+				   && $e['meta']['wpsc_end_date_time'][0] >= $today ) {
+					$eventbyday[$i][] = $e;
+				}
+			}
+		}
 	// Tables do have their uses...
 	$calendar = '<table cellpadding="0" cellspacing="0" class="wpsc-grid" data-month="'.esc_attr( $month ).'" data-year="'.esc_attr( $year ).'" data-category="'.esc_attr( $eventcategory ).'" data-location="'.esc_attr( $eventlocation ).'">';
 
@@ -121,25 +138,16 @@ function wpsimplecalendar_setup_grid( $month, $year, $eventcategory = '', $event
 		// Add in the day number
 		$calendar.= '<div class="wpsc-date">' . $list_day . '</div><div class="clear"></div>';
 
-// new location to just do a display
-
-
-// removed loop
 		$calendar.= '<ul class="simple-cal-list">';
-		while ( $eventsloop->have_posts() ) : $eventsloop->the_post();
-
-			$startdate  = date( 'Y-m-d', strtotime( get_post_meta( $post->ID, "wpsc_start_date", $single = true ) ) ) ;
-			$list_month = date( 'm',mktime(0,0,0,$month,1,$year));
-			$listdate = $year . '-' . $list_month . '-' . $list_day;
-
-			if ( $listdate == $startdate ) {
-				$classes = join( ' ', get_post_class() );
-				$calendar.= '<li class="' . $classes . '" ><a class="iframe cboxElement" href="'. get_permalink( $post->ID ) .'" rel="bookmark" title="' . get_the_title( $post->ID ) . '">' . get_the_title( $post->ID ) . '</a></li>';
+			//all the db/query access happened way up there so this is a simple loop and 
+			//check to see if our data store has anything for this day
+			if ( isset($eventbyday[$list_day]) ) {
+				foreach($eventbyday[$list_day] as $e) {
+					$classes = join( ' ', $e['classes'] );
+					$calendar.= '<li class="' . $classes . '" ><a class="iframe cboxElement" href="'. get_permalink( $e['event']->ID ) .'" rel="bookmark" title="' . get_the_title( $e['event']->ID ) . '">' . get_the_title( $e['event']->ID ) . '</a></li>';
+				}
 			}
-		endwhile;
 		$calendar.= '</ul>';
-
-		wp_reset_postdata();
 
 		$calendar.= '</td>';
 
