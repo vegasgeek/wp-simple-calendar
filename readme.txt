@@ -3,7 +3,7 @@ Contributors: vegasgeek, themightymo, brandondove, toddhuish
 Tags: calendar
 Requires at least: 3.0
 Tested up to: 3.7.1
-Stable tag: 2.0
+Stable tag: 2.0.1
 License: GPLv2 or later
 
 A simple grid view calendar
@@ -32,7 +32,10 @@ For list view:
 
 == Changelog ==
 
-= 1.2 =
+= 2.0.1 =
+* Accidentally left a wp_die in the finished code. Derp.
+
+= 2.0 =
 * Replaced Custom Meta Boxes library with CMB2
 * Replaced dates stored as text with unix timestamps
 * Updated list view to show all future events if no quantity is set
