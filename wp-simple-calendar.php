@@ -107,9 +107,7 @@ add_filter( 'manage_wpscevents_posts_columns', 'wpsimplecalendar_add_column', 10
  */
 function wpsimplecalendar_columns_content( $column_name, $post_ID ) {
 	if ( $column_name == 'wpsc_start_date_time' ) {
-			wp_die( get_post_meta( $post_ID, $column_name, true ) );
 		echo date_i18n( get_option( 'date_format' ), get_post_meta( $post_ID, $column_name, true ) );
-
 	}
 }
 add_action( 'manage_wpscevents_posts_custom_column', 'wpsimplecalendar_columns_content', 10, 2 );
